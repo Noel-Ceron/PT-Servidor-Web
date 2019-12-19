@@ -1,0 +1,6 @@
+*.pyc
+*~
+__pycache__
+entorno_vir
+db.sqlite3
+.DS_Store

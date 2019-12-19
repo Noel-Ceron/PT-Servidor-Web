@@ -1,0 +1,158 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Dashboard 3 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+  <div class="">
+    <div class="row top_tiles" style="margin: 10px 0;">
+      <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <h1><span>¡Alerta!</span></h1>
+        <h2><span> 3 TV's en Conflicto... </span> </h2>
+        <span class="sparkline_one" style="height: 160px;">
+              <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 95px; height: 30px;"></canvas>
+          </span>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-6 tile">
+
+          <!--  Se eliminó fragmento de codigo-->
+      </div>
+    </div>
+
+    <br />
+
+<!--  Se eliminó fragmento de codigo-->
+    <div class="row">
+      <div class="col-md-12 col-sm-6 col-xs-12">
+        <div class="x_panel fixed_height_320">
+          <div class="x_title">
+
+        <h2>TV's <small>Powered by TinkerBoard</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <h4>Estado de Pantallas</h4>
+
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span><font size="4">ID: TV1 </font></span>
+              </div>
+              <div class="w_center w_55">
+
+                  <span><font size="4">Edificio: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Piso: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Estado: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+
+              </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+<!-- Se eliminó Framento de codigo -->
+      <div class="col-md-5 col-sm-6 col-xs-8">
+        <div class="x_panel fixed_height_360">
+          <div class="x_title">
+            <h2>TV1 <small>Pasillo Central</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Decodificación</a>
+                  </li>
+                  <li><a href="#">Adaptativo</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div class="dashboard-widget-content">
+              <ul class="quick-list">
+                 <form action="/info" method="POST">{% csrf_token %}
+<!--                <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>   -->
+                <h5> <img src="/static/iconos/encender.png" width="15 px" height="15 px"> Estado Pantalla {{controlf.EstadoPf}}</h5>
+
+                <h5> <img src="/static/iconos/encender.png" width="15 px" height="15 px"> Estado TinkerBoard  {{controlf.EstadoTf}}</h5>
+<!--                <li><i class="fa fa-calendar-o"></i><a href="#">Activities</a></li>    -->
+                <h5> <img src="/static/iconos/puerto.svg" width="15 px" height="15 px"> Puerto {{controlf.ipf}} </h5>
+<!--                <li><i class="fa fa-area-chart"></i><a href="#">Logout</a></li>  -->
+                <h5> <img src="/static/iconos/volumen.svg" width="15 px" height="15 px"> Volumen  {{controlf.Volf}}</h5>
+                <h5> <img src="/static/iconos/mudo.svg" width="15 px" height="15 px"> Mudo  {{controlf.Mutef}}</h5>
+                <h5> <button type="submit" name="Actualizar_Info" href="{% url 'info' %}">Aplicar cambios</button></h5>
+                </form>
+
+
+              </ul>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+<!--  Se eliminó fragmento de codigo-->
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="x_panel fixed_height_320">
+          <div class="x_title">
+<!--  Se eliminó fragmento de codigo-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+  <!-- Chart.js -->
+  <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+  <!-- gauge.js -->
+  <script src="/static/vendors/gauge.js/dist/gauge.min.js"></script>
+  <!-- Skycons -->
+  <script src="/static/vendors/skycons/skycons.js"></script>
+  <!-- Flot -->
+  <script src="/static/vendors/Flot/jquery.flot.js"></script>
+  <script src="/static/vendors/Flot/jquery.flot.pie.js"></script>
+  <script src="/static/vendors/Flot/jquery.flot.time.js"></script>
+  <script src="/static/vendors/Flot/jquery.flot.stack.js"></script>
+  <script src="/static/vendors/Flot/jquery.flot.resize.js"></script>
+  <!-- Flot plugins -->
+  <script src="/static/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+  <script src="/static/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+  <script src="/static/vendors/flot.curvedlines/curvedLines.js"></script>
+  <!-- DateJS -->
+  <script src="/static/vendors/DateJS/build/date.js"></script>
+  <!-- JQVMap -->
+  <script src="/static/vendors/jqvmap/dist/jquery.vmap.js"></script>
+  <script src="/static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="/static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+{% endblock javascripts %}
