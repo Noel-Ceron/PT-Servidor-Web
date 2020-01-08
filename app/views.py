@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 
+import time
 import requests
+from wakeonlan import send_magic_packet
 
 from django.contrib.auth.models import User, Group
 #from rest_framework import viewsets
@@ -13,7 +15,12 @@ from django.contrib.auth import authenticate
 
 def controlAPI(ip, comando, tipo):
 
-    dir = ["tv_interruptor/","vol_interruptor/", "mute_interruptor/"]
+    if (comando=='1' and tipo==3):
+        #print('aqui')
+        send_magic_packet('ff.ff.ff.ff.ff.ff', '88:d7:f6:c3:3b:d7', 'FFFFFFFFFFFF')
+
+    #print(comando)
+    dir = ["tv_interruptor/","vol_interruptor/", "mute_interruptor/", "tinker_interruptor/"]
 
     url = "http://" + ip + ":8080/control/"+ dir[tipo]
     payload = { 'comando' : comando}
@@ -33,18 +40,65 @@ def info(request):
             controlf = ControlForm(request.POST)
             if controlf.is_valid():
 
+                controlf2 = ControlForm()
                 estado_pantalla = controlf.cleaned_data['EstadoPf']
                 estado_tinker = controlf.cleaned_data['EstadoTf']
                 estado_vol = controlf.cleaned_data['Volf']
                 estado_mute = controlf.cleaned_data['Mutef']
                 ip = controlf.cleaned_data['ipf']
 
+                #print("estado")
+                #print(estado_tinker)
 
+                if(estado_tinker=='1'):
+                    #print('aqui2')
+                    controlAPI(ip, estado_tinker, 3)
+                    time.sleep(1)
+                    controlAPI(ip, estado_mute, 2)
+                    time.sleep(1)
+                    controlAPI(ip, estado_vol, 1)
+                    controlAPI(ip, estado_pantalla, 0)
+
+
+                else:
+                    controlAPI(ip, estado_pantalla, 0)
+                    time.sleep(3)
+                    controlAPI(ip, estado_mute, 2)
+                    time.sleep(1)
+                    controlAPI(ip, estado_vol, 1)
+                    time.sleep(1)
+                    controlAPI(ip, estado_tinker, 3)
+
+                context = { 'controlf':controlf, 'controlf2':controlf2}
+                template = loader.get_template('app/index3.html')
+                return HttpResponse(template.render(context, request))
+
+            else:
+                controlf = ControlForm()
+                context = { 'controlf':controlf}
+                template = loader.get_template('app/index3.html')
+                return HttpResponse(template.render(context, request))
+
+
+        elif('Actualizar_Info2' in request.POST):
+            controlf2 = ControlForm(request.POST)
+            if controlf2.is_valid():
+                controlf = ControlForm()
+                estado_pantalla = controlf2.cleaned_data['EstadoPf']
+                estado_tinker = controlf2.cleaned_data['EstadoTf']
+                estado_vol = controlf2.cleaned_data['Volf']
+                estado_mute = controlf2.cleaned_data['Mutef']
+                ip = controlf2.cleaned_data['ipf']
+
+
+                controlAPI(ip, estado_tinker, 3)
+                time.sleep(1)
                 controlAPI(ip, estado_pantalla, 0)
                 controlAPI(ip, estado_vol, 1)
+                time.sleep(1)
                 controlAPI(ip, estado_mute, 2)
 
-                context = { 'controlf':controlf}
+                context = { 'controlf':controlf, 'controlf2':controlf2}
                 template = loader.get_template('app/index3.html')
                 return HttpResponse(template.render(context, request))
 
@@ -88,13 +142,14 @@ def index(request):
                 contraseña = r.cleaned_data['contraseña']
 
                 controlf = ControlForm()
+                controlf2 = ControlForm()
 
                 if(User.objects.filter(username = nombre).exists()):
 
                     dato_usuario = User.objects.get(username = nombre)
 
                     if(check_password(contraseña, dato_usuario.password)):
-                        context = { 'controlf' : controlf}
+                        context = { 'controlf':controlf, 'controlf2':controlf2}
                         template = loader.get_template('app/index3.html')
 
                         return HttpResponse(template.render(context, request))

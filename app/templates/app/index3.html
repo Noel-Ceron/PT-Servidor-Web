@@ -11,8 +11,9 @@
   <div class="">
     <div class="row top_tiles" style="margin: 10px 0;">
       <div class="col-md-3 col-sm-3 col-xs-6 tile">
-        <h1><span>¡Alerta!</span></h1>
-        <h2><span> 3 TV's en Conflicto... </span> </h2>
+        <h1><span>Bienvenido</span></h1>
+        <h1><span>¡Todo OK!</span></h1>
+<!--        <h2><span> 3 TV's en Conflicto... </span> </h2> -->
         <span class="sparkline_one" style="height: 160px;">
               <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 95px; height: 30px;"></canvas>
           </span>
@@ -50,9 +51,9 @@
               </div>
               <div class="w_center w_55">
 
-                  <span><font size="4">Edificio: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                    <span><font size="4">Piso: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                    <span><font size="4">Estado: TV1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                  <span><font size="4">Edificio: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Piso: 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Estado: Encendido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
 
               </div>
 
@@ -60,14 +61,34 @@
           </div>
 
 
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span><font size="4">ID: TV2 </font></span>
+            </div>
+
+            <div class="w_center w_55">
+
+                <span><font size="4">Edificio: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                  <span><font size="4">Piso: PB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                  <span><font size="4">Estado: Encendido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+
+            </div>
+
+
+        </div>
+
+
         </div>
       </div>
 
-<!-- Se eliminó Framento de codigo -->
+<!-- Se eliminó Framento de codigo <-->
+
+    <div class="row">
+
       <div class="col-md-5 col-sm-6 col-xs-8">
         <div class="x_panel fixed_height_360">
           <div class="x_title">
-            <h2>TV1 <small>Pasillo Central</small></h2>
+            <h2>TV1 <small>Sala HUB</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -111,9 +132,56 @@
             </div>
           </div>
         </div>
+
+      <div class="col-md-5 col-sm-6 col-xs-8">
+        <div class="x_panel fixed_height_360">
+          <div class="x_title">
+            <h2>TV2 <small>Pasillo</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Decodificación</a>
+                  </li>
+                  <li><a href="#">Adaptativo</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div class="dashboard-widget-content">
+              <ul class="quick-list">
+                 <form action="/info" method="POST">{% csrf_token %}
+<!--                <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>   -->
+                <h5> <img src="/static/iconos/encender.png" width="15 px" height="15 px"> Estado Pantalla {{controlf2.EstadoPf}}</h5>
+
+                <h5> <img src="/static/iconos/encender.png" width="15 px" height="15 px"> Estado TinkerBoard  {{controlf2.EstadoTf}}</h5>
+<!--                <li><i class="fa fa-calendar-o"></i><a href="#">Activities</a></li>    -->
+                <h5> <img src="/static/iconos/puerto.svg" width="15 px" height="15 px"> Puerto {{controlf2.ipf}} </h5>
+<!--                <li><i class="fa fa-area-chart"></i><a href="#">Logout</a></li>  -->
+                <h5> <img src="/static/iconos/volumen.svg" width="15 px" height="15 px"> Volumen  {{controlf2.Volf}}</h5>
+                <h5> <img src="/static/iconos/mudo.svg" width="15 px" height="15 px"> Mudo  {{controlf2.Mutef}}</h5>
+                <h5> <button type="submit" name="Actualizar_Info2" href="{% url 'info' %}">Aplicar cambios</button></h5>
+                </form>
+
+
+              </ul>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
-
-
 
 <!--  Se eliminó fragmento de codigo-->
 
