@@ -39,7 +39,6 @@ class ControlForm(forms.Form):
         (V75, '80%'),
     ]
 
-    ipf=forms.CharField(label='IP:',max_length=50)
     EstadoPf = forms.ChoiceField(choices=status, )
     EstadoTf = forms.ChoiceField(choices=status, )
     Mutef = forms.ChoiceField(choices=Mudo, )

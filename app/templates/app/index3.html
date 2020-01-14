@@ -1,6 +1,9 @@
 {% extends "app/base_site.html" %}
 
+{% load static %}
+
 {% block title %} Dashboard 3 {% endblock title %}
+
 
 {% block stylesheets %}
   {{ block.super }}
@@ -45,34 +48,27 @@
           <div class="x_content">
             <h4>Estado de Pantallas</h4>
 
+            {% for disp in info_control%}
+
             <div class="widget_summary">
               <div class="w_left w_25">
-                <span><font size="4">ID: TV1 </font></span>
+                <span><font size="4">ID: {{disp.IdPantalla}} </font></span>
               </div>
               <div class="w_center w_55">
 
-                  <span><font size="4">Edificio: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                    <span><font size="4">Piso: 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                    <span><font size="4">Estado: Encendido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                  <span><font size="4">Edificio: {{disp.Edificio}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Piso: {{disp.Piso}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+                    <span><font size="4">Estado Pantalla: {{disp.EstadoP}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></span>
+                    <span><font size="4">Estado TinkerBoard: {{disp.EstadoT}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
+
 
               </div>
 
 
           </div>
 
+          {% endfor %}
 
-          <div class="widget_summary">
-            <div class="w_left w_25">
-              <span><font size="4">ID: TV2 </font></span>
-            </div>
-
-            <div class="w_center w_55">
-
-                <span><font size="4">Edificio: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                  <span><font size="4">Piso: PB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-                  <span><font size="4">Estado: Encendido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span>
-
-            </div>
 
 
         </div>
